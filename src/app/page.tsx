@@ -5,10 +5,11 @@ const Home = () => {
     <>
       <Button
         variant={"secondary"}
-        className="bg-primary lg:text-lg"
+        className="bg-black lg:text-lg"
       >
         Click me
       </Button>
+      <div className="size-40 bg-black">elo</div>
     </>
   );
 };
