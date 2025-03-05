@@ -3,7 +3,12 @@ import { Button } from "@/components/ui/button";
 const Home = () => {
   return (
     <>
-      <Button className="lg:text-lg">Click me</Button>
+      <Button
+        variant={"secondary"}
+        className="bg-primary lg:text-lg"
+      >
+        Click me
+      </Button>
     </>
   );
 };
