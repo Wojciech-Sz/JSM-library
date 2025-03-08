@@ -5,6 +5,7 @@
     "source.fixAll.eslint": "explicit",
     "source.addMissingImports": "explicit"
   },
+
   "prettier.tabWidth": 2,
   "prettier.useTabs": false,
   "prettier.semi": true,
@@ -12,7 +13,8 @@
   "prettier.jsxSingleQuote": false,
   "prettier.trailingComma": "es5",
   "prettier.arrowParens": "always",
-
+  "editor.fontFamily": "Fira Code",
+  "editor.fontLigatures": true,
   "css.validate": false,
   "tailwindCSS.includeLanguages": {
     "typescript": "javascript",
