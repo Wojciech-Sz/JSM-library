@@ -1,5 +1,5 @@
-import BookList from "@/components/BookList";
-import BookOverview from "@/components/BookOverview";
+import BookList from "@/components/Book/BookList";
+import BookOverview from "@/components/Book/BookOverview";
 import { sampleBooks } from "@/constants";
 
 const Home = () => {

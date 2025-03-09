@@ -1,5 +1,5 @@
-interface BookOverviewProps {
-  id: string;
+interface Book {
+  id: number;
   title: string;
   author: string;
   genre: string;
@@ -26,4 +26,10 @@ interface BookCoverProps {
   className?: string;
   coverColor: string;
   coverUrl: string;
+}
+
+interface BookListProps {
+  title: string;
+  books: Book[];
+  containerClassName?: string;
 }

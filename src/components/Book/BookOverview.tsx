@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 
 import BookCover from "./BookCover";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 
 const BookOverview = ({
   id,
@@ -18,7 +18,7 @@ const BookOverview = ({
   videoUrl,
   summary,
   isLoaned,
-}: BookOverviewProps) => {
+}: Book) => {
   return (
     <section className="book-overview">
       <div className="flex flex-1 flex-col gap-5">
