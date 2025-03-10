@@ -2,10 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
+import { cn } from "@/lib/utils";
+
 import BookCover from "./BookCover";
 import { Button } from "../ui/button";
-
-import { cn } from "@/lib/utils";
 
 const BookCard = ({
   id,
@@ -13,7 +13,7 @@ const BookCard = ({
   genre,
   coverColor,
   coverUrl,
-  isLoaned,
+  isLoaned = true,
 }: Book) => {
   return (
     <li className={cn(isLoaned && "xs:w-52 w-full")}>
@@ -51,7 +51,7 @@ const BookCard = ({
                 Loaned on 12/03/2025
               </p>
             </div>
-            <Button className="book-btn">
+            <Button className="!book-btn">
               Download Receipt
             </Button>
           </div>

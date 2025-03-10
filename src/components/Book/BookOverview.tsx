@@ -38,7 +38,7 @@ const BookOverview = ({
             </span>
           </p>
 
-          <div className="flex flex-row gap-1">
+          <div className="flex gap-1">
             <Image
               src="/icons/star.svg"
               alt="star"

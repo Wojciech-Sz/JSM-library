@@ -1,9 +1,20 @@
 "use client";
 
+import {
+  SignedOut,
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  UserButton,
+  ClerkLoading,
+  ClerkLoaded,
+} from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
+
+import { Button } from "./ui/button";
 
 const Header = () => {
   const pathname = usePathname();
@@ -21,7 +32,7 @@ const Header = () => {
         </p>
       </Link>
 
-      <ul className="flex flex-row gap-8">
+      <ul className="flex gap-8">
         <li>
           <Link
             href="/library"
@@ -35,6 +46,32 @@ const Header = () => {
           </Link>
         </li>
       </ul>
+      <div className="flex min-w-40 gap-4">
+        <ClerkLoading>
+          <Button disabled className="cursor-not-allowed">
+            Sign In
+          </Button>
+          <Button
+            disabled
+            variant="secondary"
+            className="cursor-not-allowed"
+          >
+            Sign Up
+          </Button>
+        </ClerkLoading>
+
+        <SignedOut>
+          <SignInButton>
+            <Button>Sign In</Button>
+          </SignInButton>
+          <SignUpButton>
+            <Button variant="secondary">Sign Up</Button>
+          </SignUpButton>
+        </SignedOut>
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
+      </div>
     </header>
   );
 };

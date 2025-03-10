@@ -108,12 +108,6 @@
   }
 }
 
-@layer utilities {
-  .book-btn {
-    @apply bg-dark-600 mt-3 min-h-14 w-full font-bebas-neue text-base text-primary hover:bg-dark-600/80;
-  }
-}
-
 @utility form-btn {
   @apply bg-primary! text-dark-100! hover:bg-primary! inline-flex! min-h-14! w-full! items-center! justify-center! rounded-md! px-6! py-2! font-bold! text-base!;
 }
@@ -122,8 +116,11 @@
   @apply w-full! min-h-14! border-none! text-base! font-bold! placeholder:font-normal! text-white! placeholder:text-light-100! focus-visible:ring-0! focus-visible:shadow-none! bg-dark-300!;
 }
 
+@utility book-btn {
+  @apply bg-dark-600 mt-3 min-h-14 w-full font-bebas-neue text-base text-primary hover:bg-dark-600/90;
+}
+
 @utility book-title {
-  /* Book Card */
   @apply mt-2 line-clamp-1 text-base font-semibold text-white xs:text-xl;
 }
 
