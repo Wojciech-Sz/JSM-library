@@ -1,3 +1,5 @@
+import { Toaster } from "@/components/ui/sonner";
+
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
@@ -58,6 +60,7 @@ const RootLayout = ({
           className={`${ibmPlexSans.className} ${bebasNeue.variable} antialiased`}
         >
           {children}
+          <Toaster />
         </body>
       </html>
     </ClerkProvider>

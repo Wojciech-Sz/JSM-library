@@ -7,7 +7,6 @@ import {
   SignedIn,
   UserButton,
   ClerkLoading,
-  ClerkLoaded,
 } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
@@ -16,10 +15,15 @@ import React from "react";
 
 import { Button } from "./ui/button";
 
-const Header = () => {
+const Header = ({
+  sessionId,
+}: {
+  sessionId: string | null;
+}) => {
   const pathname = usePathname();
+
   return (
-    <header className="my-10 flex justify-between gap-5">
+    <header className="my-10 flex justify-between items-center gap-5">
       <Link href="/" className="flex items-center gap-2">
         <Image
           src="/icons/logo.svg"
@@ -46,18 +50,27 @@ const Header = () => {
           </Link>
         </li>
       </ul>
-      <div className="flex min-w-40 gap-4">
+      <div className="flex gap-4">
         <ClerkLoading>
-          <Button disabled className="cursor-not-allowed">
-            Sign In
-          </Button>
-          <Button
-            disabled
-            variant="secondary"
-            className="cursor-not-allowed"
-          >
-            Sign Up
-          </Button>
+          {sessionId ? (
+            <div className="size-7 rounded-full bg-purple-400"></div>
+          ) : (
+            <>
+              <Button
+                disabled
+                className="cursor-not-allowed"
+              >
+                Sign In
+              </Button>
+              <Button
+                disabled
+                variant="secondary"
+                className="cursor-not-allowed"
+              >
+                Sign Up
+              </Button>
+            </>
+          )}
         </ClerkLoading>
 
         <SignedOut>
