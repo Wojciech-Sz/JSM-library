@@ -15,25 +15,14 @@ import React from "react";
 
 import { Button } from "./ui/button";
 
-const Header = ({
-  sessionId,
-}: {
-  sessionId: string | null;
-}) => {
+const Header = ({ sessionId }: { sessionId: string | null }) => {
   const pathname = usePathname();
 
   return (
     <header className="my-10 flex justify-between items-center gap-5">
       <Link href="/" className="flex items-center gap-2">
-        <Image
-          src="/icons/logo.svg"
-          alt="logo"
-          width={40}
-          height={40}
-        />
-        <p className="text-2xl font-bold text-light-100">
-          BookWise
-        </p>
+        <Image src="/icons/logo.svg" alt="logo" width={40} height={40} />
+        <p className="text-2xl font-bold text-light-100">BookWise</p>
       </Link>
 
       <ul className="flex gap-8">
@@ -41,9 +30,7 @@ const Header = ({
           <Link
             href="/library"
             className={`text-base cursor-pointer capitalize ${
-              pathname === "/library"
-                ? "text-light-200"
-                : "text-light-100"
+              pathname === "/library" ? "text-light-200" : "text-light-100"
             }`}
           >
             Library
@@ -56,10 +43,7 @@ const Header = ({
             <div className="size-7 rounded-full bg-purple-400"></div>
           ) : (
             <>
-              <Button
-                disabled
-                className="cursor-not-allowed"
-              >
+              <Button disabled className="cursor-not-allowed">
                 Sign In
               </Button>
               <Button
