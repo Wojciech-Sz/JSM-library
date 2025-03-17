@@ -19,20 +19,10 @@ const BookCard = ({
     <li className={cn(isLoaned && "xs:w-52 w-full")}>
       <Link
         href={`/books/${id}`}
-        className={cn(
-          isLoaned && "w-full flex flex-col items-center"
-        )}
+        className={cn(isLoaned && "w-full flex flex-col items-center")}
       >
-        <BookCover
-          coverColor={coverColor}
-          coverUrl={coverUrl}
-        />
-        <div
-          className={cn(
-            "mt-4",
-            !isLoaned && "xs:max-w-40 max-w-28"
-          )}
-        >
+        <BookCover coverColor={coverColor} coverUrl={coverUrl} />
+        <div className={cn("mt-4", !isLoaned && "xs:max-w-40 max-w-28")}>
           <p className="book-title">{title}</p>
 
           <p className="book-genre">{genre}</p>
@@ -47,13 +37,9 @@ const BookCard = ({
                 height={18}
                 className="object-contain"
               />
-              <p className="text-light-100">
-                Loaned on 12/03/2025
-              </p>
+              <p className="text-light-100">Loaned on 12/03/2025</p>
             </div>
-            <Button className="!book-btn">
-              Download Receipt
-            </Button>
+            <Button className="!book-btn">Download Receipt</Button>
           </div>
         )}
       </Link>

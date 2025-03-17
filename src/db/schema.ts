@@ -2,7 +2,6 @@ import {
   uuid,
   text,
   pgTable,
-  varchar,
   integer,
   pgEnum,
   date,
@@ -22,8 +21,6 @@ export const BORROW_STATUS_ENUM = pgEnum("borrow_status", [
 
 export const users = pgTable("users", {
   id: uuid("id").notNull().primaryKey().defaultRandom().unique(),
-  firstName: varchar("first_name", { length: 255 }).notNull(),
-  lastName: varchar("last_name", { length: 255 }).notNull(),
   universityId: integer("university_id").notNull().unique(),
   universityCard: text("university_card").notNull(),
   role: ROLE_ENUM("role").notNull().default("USER"),

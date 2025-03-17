@@ -3,13 +3,8 @@ import { ReactNode } from "react";
 
 import Header from "@/components/Header";
 
-const Layout = async ({
-  children,
-}: {
-  children: ReactNode;
-}) => {
+const Layout = async ({ children }: { children: ReactNode }) => {
   const { sessionId } = await auth();
-  console.log(sessionId);
   return (
     <main className="root-container">
       <div className="mx-auto max-w-7xl">
