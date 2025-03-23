@@ -14,12 +14,7 @@ interface Book {
   isLoaned?: boolean;
 }
 
-type BookCoverVariant =
-  | "extraSmall"
-  | "small"
-  | "medium"
-  | "regular"
-  | "wide";
+type BookCoverVariant = "extraSmall" | "small" | "medium" | "regular" | "wide";
 
 interface BookCoverProps {
   variant?: BookCoverVariant;
@@ -32,4 +27,14 @@ interface BookListProps {
   title: string;
   books: Book[];
   containerClassName?: string;
+}
+
+interface FileUploadProps {
+  type: "image" | "video";
+  accept: string;
+  placeholder: string;
+  folder: string;
+  variant: "dark" | "light";
+  onFileChange: (filePath: string) => void;
+  value?: string;
 }

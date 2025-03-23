@@ -8,7 +8,7 @@ import {
   UserButton,
   ClerkLoading,
 } from "@clerk/nextjs";
-import { LogIn, UserRound, UserRoundPen, UserRoundPlus } from "lucide-react";
+import { LogIn, UserRound, UserRoundPlus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -45,9 +45,6 @@ const Header = ({ sessionId }: { sessionId: string | null }) => {
         <ClerkLoading>
           {sessionId ? (
             <>
-              <Button title="My Profile" disabled>
-                My Profile
-              </Button>
               <MyAvatar />
             </>
           ) : (
@@ -75,8 +72,15 @@ const Header = ({ sessionId }: { sessionId: string | null }) => {
           </SignUpButton>
         </SignedOut>
         <SignedIn>
-          <MyProfileButton />
-          <UserButton fallback={<MyAvatar />} />
+          <UserButton>
+            <UserButton.MenuItems>
+              <UserButton.Link
+                href="/my-profile"
+                label="My Profile"
+                labelIcon={<UserRound className="size-5" />}
+              />
+            </UserButton.MenuItems>
+          </UserButton>
         </SignedIn>
       </div>
     </header>
@@ -100,17 +104,6 @@ const MySignUpButton = () => {
       <span className="hidden xs:block">Sign Up</span>
       <UserRoundPlus className="xs:hidden block" />
     </>
-  );
-};
-
-const MyProfileButton = () => {
-  return (
-    <Link title="My Profile" href="/my-profile">
-      <Button className=" overflow-hidden">
-        <span className="hidden xs:block">My Profile</span>
-        <UserRoundPen className="xs:hidden block size-6" />
-      </Button>
-    </Link>
   );
 };
 

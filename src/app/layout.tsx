@@ -1,11 +1,11 @@
-import { Toaster } from "@/components/ui/sonner";
-
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { ReactNode } from "react";
+
+import { Toaster } from "@/components/ui/sonner";
 const ibmPlexSans = localFont({
   src: [
     {
@@ -48,11 +48,7 @@ export const metadata: Metadata = {
   description: "Library Management System",
 };
 
-const RootLayout = ({
-  children,
-}: {
-  children: ReactNode;
-}) => {
+const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
     <ClerkProvider appearance={{ baseTheme: dark }}>
       <html lang="en">
