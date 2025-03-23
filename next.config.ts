@@ -25,30 +25,6 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  webpack: (config, { isServer }) => {
-    if (!isServer) {
-      // Don't resolve 'fs' module on the client to prevent this error
-      config.resolve.fallback = {
-        ...config.resolve.fallback,
-        fs: false,
-        net: false,
-        tls: false,
-        crypto: require.resolve("crypto-browserify"),
-        stream: require.resolve("stream-browserify"),
-        buffer: require.resolve("buffer"),
-      };
-
-      config.plugins = [
-        ...config.plugins,
-        // This provides Buffer for client-side
-        new (require("webpack").ProvidePlugin)({
-          Buffer: ["buffer", "Buffer"],
-        }),
-      ];
-    }
-
-    return config;
-  },
 };
 
 export default nextConfig;
