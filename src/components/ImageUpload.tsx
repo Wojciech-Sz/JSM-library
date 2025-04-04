@@ -10,6 +10,8 @@ import config from "@/lib/config";
 import { RequestError } from "@/lib/http-errors";
 import logger from "@/lib/logger";
 
+import { Input } from "./ui/input";
+
 const {
   env: {
     imageKit: { publicKey, urlEndpoint },
@@ -69,6 +71,7 @@ const ImageUpload = ({
   };
   const onSuccess = (res: any) => {
     setFile(res);
+    onFileChange(res.filePath);
     toast.success("File uploaded successfully", {
       description: `${res.filePath} uploaded successfully`,
     });
@@ -112,9 +115,7 @@ const ImageUpload = ({
         className="hidden"
       />
       <div className="flex flex-col gap-2">
-        <p className="text-base font-semibold text-light-100">
-          Upload University ID Card
-        </p>
+        <p className="text-base font-semibold text-light-100">{placeholder}</p>
         <button
           onClick={(e) => {
             e.preventDefault();

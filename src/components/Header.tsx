@@ -17,7 +17,7 @@ import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
 
-const Header = ({ sessionId }: { sessionId: string | null }) => {
+const Header = ({ userId }: { userId: string | null }) => {
   const pathname = usePathname();
 
   return (
@@ -43,7 +43,7 @@ const Header = ({ sessionId }: { sessionId: string | null }) => {
       </ul>
       <div className="flex items-center gap-4">
         <ClerkLoading>
-          {sessionId ? (
+          {userId ? (
             <>
               <MyAvatar />
             </>

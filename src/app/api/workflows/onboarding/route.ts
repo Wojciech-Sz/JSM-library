@@ -1,45 +1,66 @@
 import { serve } from "@upstash/workflow/nextjs";
 
-type InitialData = {
-  email: string;
+import { getUserByUniversityId } from "@/lib/actions/user.action";
+import { sendEmail } from "@/lib/workflow";
+
+const ONE_DAY_IN_MS = 60 * 60 * 24 * 1000;
+const THREE_DAYS_IN_MS = 3 * ONE_DAY_IN_MS;
+const THIRTY_DAYS_IN_MS = 30 * ONE_DAY_IN_MS;
+
+const getUserState = async (universityId: number): Promise<UserState> => {
+  const user = await getUserByUniversityId(universityId);
+
+  if (!user) return "non-active";
+
+  const lastActive = new Date(user.lastActivityDate!);
+  const now = new Date();
+  const timeDifference = now.getTime() - lastActive.getTime();
+
+  if (
+    timeDifference > THREE_DAYS_IN_MS &&
+    timeDifference <= THIRTY_DAYS_IN_MS
+  ) {
+    return "non-active";
+  }
+
+  return "active";
 };
 
 export const { POST } = serve<InitialData>(async (context) => {
-  const { email } = context.requestPayload;
+  const { email, firstName, lastName, universityId } = context.requestPayload;
 
   await context.run("new-signup", async () => {
-    await sendEmail("Welcome to the platform", email);
+    await sendEmail({
+      email,
+      subject: "Welcome to the platform",
+      message: `Welcome ${firstName} ${lastName}`,
+    });
   });
 
-  await context.sleep("wait-for-3-days", 60 * 60 * 24 * 3);
+  await context.sleep("wait-for-3-days", THREE_DAYS_IN_MS);
 
   while (true) {
     const state = await context.run("check-user-state", async () => {
-      return await getUserState();
+      return await getUserState(universityId);
     });
-
     if (state === "non-active") {
       await context.run("send-email-non-active", async () => {
-        await sendEmail("Email to non-active users", email);
+        await sendEmail({
+          email,
+          subject: "Are you still there",
+          message: `hey ${firstName} ${lastName} We miss you`,
+        });
       });
     } else if (state === "active") {
       await context.run("send-email-active", async () => {
-        await sendEmail("Send newsletter to active users", email);
+        await sendEmail({
+          email,
+          subject: "Welcome back!",
+          message: `Welcome back ${firstName} ${lastName}`,
+        });
       });
     }
 
-    await context.sleep("wait-for-1-month", 60 * 60 * 24 * 30);
+    await context.sleep("wait-for-1-month", THIRTY_DAYS_IN_MS);
   }
 });
-
-async function sendEmail(message: string, email: string) {
-  // Implement email sending logic here
-  console.log(`Sending ${message} email to ${email}`);
-}
-
-type UserState = "non-active" | "active";
-
-const getUserState = async (): Promise<UserState> => {
-  // Implement user state logic here
-  return "non-active";
-};

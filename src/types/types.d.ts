@@ -38,3 +38,40 @@ interface FileUploadProps {
   onFileChange: (filePath: string) => void;
   value?: string;
 }
+
+interface CustomJwtSessionClaims {
+  metadata: {
+    onboardingComplete?: boolean;
+  };
+}
+
+interface UserPublicMetadata {
+  id: string;
+  onboardingComplete: boolean;
+}
+
+type ActionResponse<T = null> = {
+  success: boolean;
+  data?: T;
+  error?: {
+    message: string;
+    details?: Record<string, string[]>;
+  };
+  status?: number;
+};
+
+type SuccessResponse<T = null> = ActionResponse<T> & {
+  success: true;
+};
+type ErrorResponse = ActionResponse<undefined> & {
+  success: false;
+};
+
+type InitialData = {
+  email: string;
+  firstName: string;
+  lastName: string;
+  universityId: number;
+};
+
+type UserState = "non-active" | "active";

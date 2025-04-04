@@ -1,11 +1,16 @@
-"use server";
+import { eq } from "drizzle-orm";
 
-import { auth } from "@clerk/nextjs/server";
+import { db } from "@/db/drizzle";
+import { users } from "@/db/schema";
 
-export const getUser = async () => {
-  const Auth = await auth();
-  if (!Auth.userId) {
-    return null;
+export const getUserByUniversityId = async (universityId: number) => {
+  const existingUser = await db
+    .select()
+    .from(users)
+    .where(eq(users.universityId, universityId))
+    .limit(1);
+  if (existingUser.length > 0) {
+    return existingUser[0];
   }
-  return Auth;
+  return null;
 };
