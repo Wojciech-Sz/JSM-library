@@ -7,10 +7,7 @@ import { useRef, useState } from "react";
 import { toast } from "sonner";
 
 import config from "@/lib/config";
-import { RequestError } from "@/lib/http-errors";
 import logger from "@/lib/logger";
-
-import { Input } from "./ui/input";
 
 const {
   env: {
@@ -24,19 +21,19 @@ const authenticator = async () => {
 
     if (!response.ok) {
       const errorText = await response.text();
-      throw new RequestError(response.status, "Failed to authenticate", {
-        error: [errorText],
-      });
+
+      throw new Error(
+        `Request failed with status ${response.status}: ${errorText}`
+      );
     }
 
     const data = await response.json();
+
     const { signature, expire, token } = data;
 
-    return { signature, expire, token };
+    return { token, expire, signature };
   } catch (error: any) {
-    throw new RequestError(500, "Failed to authenticate", {
-      error: [error?.message],
-    });
+    throw new Error(`Authentication request failed: ${error.message}`);
   }
 };
 
